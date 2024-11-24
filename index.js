@@ -21,7 +21,7 @@ readdirSync('./routes')
 
 // Default route for testing
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.sendFile(__dirname + '/index.html');
 });
 
 // Read the port from environment variables or default to 8000
@@ -31,4 +31,3 @@ const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-                  

@@ -1,42 +1,66 @@
 const express = require('express');
 const router = express.Router();
 
-const phoneData = [{
-    _id:1001,
-    title:'iphone 15',
-    price: 1500.99,
-    previousPrice:1600.99,
-    description:'Lorem Ipsum has been the industrys standard dummy text',
-    category:'phone',
-    image:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fapple-iphone-back-view&psig=AOvVaw0Qw016EFLYI8xovOoLSWvl&ust=1732492819387000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOiYmOrU84kDFQAAAAAdAAAAABAE',
-    isNew:true,
-    brand:'Apple'
-},
-{
-    _id:1002     ,
-    title:'iphone 15',
-    price: 1500.99,
-    previousPrice:1600.99,
-    description:'Lorem Ipsum has been the industrys standard dummy text',
-    category:'phone',
-    image:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fapple-iphone-back-view&psig=AOvVaw0Qw016EFLYI8xovOoLSWvl&ust=1732492819387000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOiYmOrU84kDFQAAAAAdAAAAABAE',
-    isNew:true,
-    brand:'Apple'
-},
-{
-    _id:1003,
-    title:'iphone 15',
-    price: 1500.99,
-    previousPrice:1600.99,
-    description:'Lorem Ipsum has been the industrys standard dummy text',
-    category:'phone',
-    image:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fapple-iphone-back-view&psig=AOvVaw0Qw016EFLYI8xovOoLSWvl&ust=1732492819387000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOiYmOrU84kDFQAAAAAdAAAAABAE',
-    isNew:true,
-    brand:'Apple'
-}]
+const phoneCaseData = [
+  {
+    _id: 2001,
+    title: 'iPhone 15 Case',
+    price: 29.99,
+    previousPrice: 39.99,
+    description: 'A sleek and durable case designed to protect your iPhone 15 from scratches and drops.',
+    category: 'phone case',
+    image: 'https://example.com/iphone15-case.jpg', // Replace with valid image URL
+    isNew: true,
+    brand: 'OtterBox',
+    compatibleWith: 'iPhone 15',
+    material: 'Polycarbonate',
+    color: 'Black'
+  },
+  {
+    _id: 2002,
+    title: 'iPhone 15 Case',
+    price: 19.99,
+    previousPrice: 24.99,
+    description: 'A stylish phone case with a slim profile, offering protection without adding bulk.',
+    category: 'phone case',
+    image: 'https://example.com/iphone15-case.jpg', // Replace with valid image URL
+    isNew: true,
+    brand: 'Spigen',
+    compatibleWith: 'iPhone 15',
+    material: 'Silicone',
+    color: 'Blue'
+  },
+  {
+    _id: 2003,
+    title: 'iPhone 15 Case',
+    price: 35.99,
+    previousPrice: 45.99,
+    description: 'A rugged, shockproof case designed for maximum protection in extreme conditions.',
+    category: 'phone case',
+    image: 'https://example.com/iphone15-case.jpg', // Replace with valid image URL
+    isNew: true,
+    brand: 'LifeProof',
+    compatibleWith: 'iPhone 15',
+    material: 'Rubber, Plastic',
+    color: 'Green'
+  }
+];
 
+// Route to get all phone cases
 router.get('/', (req, res) => {
-  res.send(phoneData);
+  res.json(phoneCaseData);
+});
+
+// Route to get a single phone case by ID
+router.get('/:id', (req, res) => {
+  const phoneCaseId = parseInt(req.params.id, 10);
+  const singleCase = phoneCaseData.find(item => item._id === phoneCaseId);
+
+  if (!singleCase) {
+    return res.status(404).json({ message: "Phone case not found" });
+  }
+
+  res.json(singleCase);
 });
 
 module.exports = router;

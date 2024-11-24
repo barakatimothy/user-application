@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to JSON Server</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>Welcome to the JSON Server</header>
+    <main>
+        <section>
+            <h1>Products</h1>
+            <p>Explore our collection of phones and phone cases</p>
+            <button id="loadPhones">Load Phones</button>
+            <button id="loadPhoneCases">Load Phone Cases</button>
+            <div id="productList"></div>
+        </section>
+    </main>
+    
+    <script>
+        // Example script to load product data
+        document.getElementById('loadPhones').addEventListener('click', () => {
+            fetch('/phone')
+                .then(response => response.json())
+                .then(data => {
+                    const productList = document.getElementById('productList');
+                    productList.innerHTML = '';
+                    data.forEach(phone => {
+                        const phoneDiv = document.createElement('div');
+                        phoneDiv.innerHTML = `
+                            <h3>${phone.title}</h3>
+                            <p>${phone.description}</p>
+                            <p>Price: $${phone.price}</p>
+                            <img src="${phone.image}" alt="${phone.title}" style="width: 200px;">
+                        `;
+                        productList.appendChild(phoneDiv);
+                    });
+                });
+        });
+
+        document.getElementById('loadPhoneCases').addEventListener('click', () => {
+            fetch('/phonecase')
+                .then(response => response.json())
+                .then(data => {
+                    const productList = document.getElementById('productList');
+                    productList.innerHTML = '';
+                    data.forEach(caseItem => {
+                        const caseDiv = document.createElement('div');
+                        caseDiv.innerHTML = `
+                            <h3>${caseItem.title}</h3>
+                            <p>${caseItem.description}</p>
+                            <p>Price: $${caseItem.price}</p>
+                            <img src="${caseItem.image}" alt="${caseItem.title}" style="width: 200px;">
+                        `;
+                        productList.appendChild(caseDiv);
+                    });
+                });
+        });
+    </script>
+</body>
+</html>
